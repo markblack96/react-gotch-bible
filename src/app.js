@@ -33,7 +33,6 @@ class App extends React.Component {
                         card: cards[d%4][d%13]
                     })
                 );
-        console.log(cards);
         this.setState({deck: cards});
     }
     drawCard() {
@@ -55,16 +54,20 @@ class App extends React.Component {
         });
     }
     render() {
+        let ranks = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
         return (
             <div id="app">
                 <p>Begin by drawing a card:</p>
                 <button onClick={this.drawCard}>Draw Card</button>
-                <div class="flex-col">
-                    <span>{this.state.currentCard.card}</span>
+                <div className="flex center row">
+                    <span className={this.state.currentCard.suit.toLowerCase() + " card"}>{this.state.currentCard.card}</span>
+                    <div className="flex-col center">
                     <span>{`${this.state.currentCard.rank} of ${this.state.currentCard.suit}`}</span>
-                    <span>{`${this.state.currentWorkout}`}</span>
+                    <span>{`${ranks.indexOf(this.state.currentCard.rank)+1} x ${this.state.currentWorkout}`}</span>
+                    </div>
                 </div>
                 <div id="inputs" className="flex-col">
+                    <h3>Options:</h3>
                     <label>Hearts: </label><input id="hearts" type="text" defaultValue={this.state.workouts['hearts']}></input>
                     <label>Spades: </label><input id="spades" type="text" defaultValue={this.state.workouts['spades']}></input>
                     <label>Diamonds: </label><input id="diamonds" type="text" defaultValue={this.state.workouts['diamonds']}></input>
